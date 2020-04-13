@@ -1,0 +1,7 @@
+include:
+  - local: .gitlab/ci/generate.gitlab-ci.yml
+
+stages:
+  - build
+  - test
+  - publish
