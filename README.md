@@ -1,4 +1,4 @@
-# OpenAPIClient-php
+# NodeumSDK
 
 The Nodeum API makes it easy to tap into the digital data mesh that runs across your organisation. Make requests to our API endpoints and we’ll give you everything you need to interconnect your business workflows with your storage.
 
@@ -85,7 +85,7 @@ Then run `composer install`
 Download the files and include `autoload.php`:
 
 ```php
-    require_once('/path/to/OpenAPIClient-php/vendor/autoload.php');
+    require_once('/path/to/NodeumSDK/vendor/autoload.php');
 ```
 
 ## Tests
