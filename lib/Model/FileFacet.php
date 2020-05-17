@@ -28,8 +28,6 @@
  */
 
 namespace NodeumSDK\Client\Model;
-
-use \ArrayAccess;
 use \NodeumSDK\Client\ObjectSerializer;
 
 /**
@@ -40,7 +38,7 @@ use \NodeumSDK\Client\ObjectSerializer;
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class FileFacet implements ModelInterface, ArrayAccess
+class FileFacet extends DefaultFacet 
 {
     const DISCRIMINATOR = null;
 
@@ -57,8 +55,9 @@ class FileFacet implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'count' => 'int',
-        'file_size_sum' => 'int'
+        'files_count' => 'int',
+        'file_size_sum' => 'int',
+        'cost' => 'float'
     ];
 
     /**
@@ -67,8 +66,9 @@ class FileFacet implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'count' => null,
-        'file_size_sum' => null
+        'files_count' => null,
+        'file_size_sum' => null,
+        'cost' => null
     ];
 
     /**
@@ -78,7 +78,7 @@ class FileFacet implements ModelInterface, ArrayAccess
      */
     public static function openAPITypes()
     {
-        return self::$openAPITypes;
+        return self::$openAPITypes + parent::openAPITypes();
     }
 
     /**
@@ -88,7 +88,7 @@ class FileFacet implements ModelInterface, ArrayAccess
      */
     public static function openAPIFormats()
     {
-        return self::$openAPIFormats;
+        return self::$openAPIFormats + parent::openAPIFormats();
     }
 
     /**
@@ -98,8 +98,9 @@ class FileFacet implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'count' => 'count',
-        'file_size_sum' => 'file_size_sum'
+        'files_count' => 'files_count',
+        'file_size_sum' => 'file_size_sum',
+        'cost' => 'cost'
     ];
 
     /**
@@ -108,8 +109,9 @@ class FileFacet implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'count' => 'setCount',
-        'file_size_sum' => 'setFileSizeSum'
+        'files_count' => 'setFilesCount',
+        'file_size_sum' => 'setFileSizeSum',
+        'cost' => 'setCost'
     ];
 
     /**
@@ -118,8 +120,9 @@ class FileFacet implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'count' => 'getCount',
-        'file_size_sum' => 'getFileSizeSum'
+        'files_count' => 'getFilesCount',
+        'file_size_sum' => 'getFileSizeSum',
+        'cost' => 'getCost'
     ];
 
     /**
@@ -130,7 +133,7 @@ class FileFacet implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -140,7 +143,7 @@ class FileFacet implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -150,7 +153,7 @@ class FileFacet implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -167,12 +170,6 @@ class FileFacet implements ModelInterface, ArrayAccess
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -182,8 +179,11 @@ class FileFacet implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['count'] = isset($data['count']) ? $data['count'] : null;
+        parent::__construct($data);
+
+        $this->container['files_count'] = isset($data['files_count']) ? $data['files_count'] : null;
         $this->container['file_size_sum'] = isset($data['file_size_sum']) ? $data['file_size_sum'] : null;
+        $this->container['cost'] = isset($data['cost']) ? $data['cost'] : null;
     }
 
     /**
@@ -193,7 +193,7 @@ class FileFacet implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
         return $invalidProperties;
     }
@@ -211,25 +211,25 @@ class FileFacet implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets count
+     * Gets files_count
      *
      * @return int|null
      */
-    public function getCount()
+    public function getFilesCount()
     {
-        return $this->container['count'];
+        return $this->container['files_count'];
     }
 
     /**
-     * Sets count
+     * Sets files_count
      *
-     * @param int|null $count count
+     * @param int|null $files_count files_count
      *
      * @return $this
      */
-    public function setCount($count)
+    public function setFilesCount($files_count)
     {
-        $this->container['count'] = $count;
+        $this->container['files_count'] = $files_count;
 
         return $this;
     }
@@ -254,6 +254,30 @@ class FileFacet implements ModelInterface, ArrayAccess
     public function setFileSizeSum($file_size_sum)
     {
         $this->container['file_size_sum'] = $file_size_sum;
+
+        return $this;
+    }
+
+    /**
+     * Gets cost
+     *
+     * @return float|null
+     */
+    public function getCost()
+    {
+        return $this->container['cost'];
+    }
+
+    /**
+     * Sets cost
+     *
+     * @param float|null $cost cost
+     *
+     * @return $this
+     */
+    public function setCost($cost)
+    {
+        $this->container['cost'] = $cost;
 
         return $this;
     }

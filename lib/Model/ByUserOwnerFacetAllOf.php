@@ -57,7 +57,7 @@ class ByUserOwnerFacetAllOf implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'user_owner_id' => '\NodeumSDK\Client\Model\ByDateFacetBuckets'
+        'user_owner_id_l' => '\NodeumSDK\Client\Model\ByDateFacetBuckets'
     ];
 
     /**
@@ -66,7 +66,7 @@ class ByUserOwnerFacetAllOf implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'user_owner_id' => null
+        'user_owner_id_l' => null
     ];
 
     /**
@@ -96,7 +96,7 @@ class ByUserOwnerFacetAllOf implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'user_owner_id' => 'user_owner_id'
+        'user_owner_id_l' => 'user_owner_id_l'
     ];
 
     /**
@@ -105,7 +105,7 @@ class ByUserOwnerFacetAllOf implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'user_owner_id' => 'setUserOwnerId'
+        'user_owner_id_l' => 'setUserOwnerIdL'
     ];
 
     /**
@@ -114,7 +114,7 @@ class ByUserOwnerFacetAllOf implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'user_owner_id' => 'getUserOwnerId'
+        'user_owner_id_l' => 'getUserOwnerIdL'
     ];
 
     /**
@@ -177,7 +177,7 @@ class ByUserOwnerFacetAllOf implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['user_owner_id'] = isset($data['user_owner_id']) ? $data['user_owner_id'] : null;
+        $this->container['user_owner_id_l'] = isset($data['user_owner_id_l']) ? $data['user_owner_id_l'] : null;
     }
 
     /**
@@ -205,25 +205,25 @@ class ByUserOwnerFacetAllOf implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets user_owner_id
+     * Gets user_owner_id_l
      *
      * @return \NodeumSDK\Client\Model\ByDateFacetBuckets|null
      */
-    public function getUserOwnerId()
+    public function getUserOwnerIdL()
     {
-        return $this->container['user_owner_id'];
+        return $this->container['user_owner_id_l'];
     }
 
     /**
-     * Sets user_owner_id
+     * Sets user_owner_id_l
      *
-     * @param \NodeumSDK\Client\Model\ByDateFacetBuckets|null $user_owner_id user_owner_id
+     * @param \NodeumSDK\Client\Model\ByDateFacetBuckets|null $user_owner_id_l user_owner_id_l
      *
      * @return $this
      */
-    public function setUserOwnerId($user_owner_id)
+    public function setUserOwnerIdL($user_owner_id_l)
     {
-        $this->container['user_owner_id'] = $user_owner_id;
+        $this->container['user_owner_id_l'] = $user_owner_id_l;
 
         return $this;
     }

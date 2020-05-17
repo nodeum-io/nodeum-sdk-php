@@ -58,7 +58,9 @@ class BySizeFacet implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'count' => 'int',
+        'files_count' => 'int',
         'file_size_sum' => 'int',
+        'cost' => 'float',
         'less_100_kb' => '\NodeumSDK\Client\Model\ByDateFacet',
         'less_1_mb' => '\NodeumSDK\Client\Model\ByDateFacet',
         'less_10_mb' => '\NodeumSDK\Client\Model\ByDateFacet',
@@ -76,7 +78,9 @@ class BySizeFacet implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'count' => null,
+        'files_count' => null,
         'file_size_sum' => null,
+        'cost' => null,
         'less_100_kb' => null,
         'less_1_mb' => null,
         'less_10_mb' => null,
@@ -115,7 +119,9 @@ class BySizeFacet implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'count' => 'count',
+        'files_count' => 'files_count',
         'file_size_sum' => 'file_size_sum',
+        'cost' => 'cost',
         'less_100_kb' => 'less_100_kb',
         'less_1_mb' => 'less_1_mb',
         'less_10_mb' => 'less_10_mb',
@@ -133,7 +139,9 @@ class BySizeFacet implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'count' => 'setCount',
+        'files_count' => 'setFilesCount',
         'file_size_sum' => 'setFileSizeSum',
+        'cost' => 'setCost',
         'less_100_kb' => 'setLess100Kb',
         'less_1_mb' => 'setLess1Mb',
         'less_10_mb' => 'setLess10Mb',
@@ -151,7 +159,9 @@ class BySizeFacet implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'count' => 'getCount',
+        'files_count' => 'getFilesCount',
         'file_size_sum' => 'getFileSizeSum',
+        'cost' => 'getCost',
         'less_100_kb' => 'getLess100Kb',
         'less_1_mb' => 'getLess1Mb',
         'less_10_mb' => 'getLess10Mb',
@@ -223,7 +233,9 @@ class BySizeFacet implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['count'] = isset($data['count']) ? $data['count'] : null;
+        $this->container['files_count'] = isset($data['files_count']) ? $data['files_count'] : null;
         $this->container['file_size_sum'] = isset($data['file_size_sum']) ? $data['file_size_sum'] : null;
+        $this->container['cost'] = isset($data['cost']) ? $data['cost'] : null;
         $this->container['less_100_kb'] = isset($data['less_100_kb']) ? $data['less_100_kb'] : null;
         $this->container['less_1_mb'] = isset($data['less_1_mb']) ? $data['less_1_mb'] : null;
         $this->container['less_10_mb'] = isset($data['less_10_mb']) ? $data['less_10_mb'] : null;
@@ -283,6 +295,30 @@ class BySizeFacet implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets files_count
+     *
+     * @return int|null
+     */
+    public function getFilesCount()
+    {
+        return $this->container['files_count'];
+    }
+
+    /**
+     * Sets files_count
+     *
+     * @param int|null $files_count files_count
+     *
+     * @return $this
+     */
+    public function setFilesCount($files_count)
+    {
+        $this->container['files_count'] = $files_count;
+
+        return $this;
+    }
+
+    /**
      * Gets file_size_sum
      *
      * @return int|null
@@ -302,6 +338,30 @@ class BySizeFacet implements ModelInterface, ArrayAccess
     public function setFileSizeSum($file_size_sum)
     {
         $this->container['file_size_sum'] = $file_size_sum;
+
+        return $this;
+    }
+
+    /**
+     * Gets cost
+     *
+     * @return float|null
+     */
+    public function getCost()
+    {
+        return $this->container['cost'];
+    }
+
+    /**
+     * Sets cost
+     *
+     * @param float|null $cost cost
+     *
+     * @return $this
+     */
+    public function setCost($cost)
+    {
+        $this->container['cost'] = $cost;
 
         return $this;
     }

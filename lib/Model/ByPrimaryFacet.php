@@ -55,7 +55,7 @@ class ByPrimaryFacet extends FileFacet
       * @var string[]
       */
     protected static $openAPITypes = [
-        'primary_name' => '\NodeumSDK\Client\Model\ByDateFacetBuckets'
+        'prim_name_s' => '\NodeumSDK\Client\Model\ByDateFacetBuckets'
     ];
 
     /**
@@ -64,7 +64,7 @@ class ByPrimaryFacet extends FileFacet
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'primary_name' => null
+        'prim_name_s' => null
     ];
 
     /**
@@ -94,7 +94,7 @@ class ByPrimaryFacet extends FileFacet
      * @var string[]
      */
     protected static $attributeMap = [
-        'primary_name' => 'primary_name'
+        'prim_name_s' => 'prim_name_s'
     ];
 
     /**
@@ -103,7 +103,7 @@ class ByPrimaryFacet extends FileFacet
      * @var string[]
      */
     protected static $setters = [
-        'primary_name' => 'setPrimaryName'
+        'prim_name_s' => 'setPrimNameS'
     ];
 
     /**
@@ -112,7 +112,7 @@ class ByPrimaryFacet extends FileFacet
      * @var string[]
      */
     protected static $getters = [
-        'primary_name' => 'getPrimaryName'
+        'prim_name_s' => 'getPrimNameS'
     ];
 
     /**
@@ -171,7 +171,7 @@ class ByPrimaryFacet extends FileFacet
     {
         parent::__construct($data);
 
-        $this->container['primary_name'] = isset($data['primary_name']) ? $data['primary_name'] : null;
+        $this->container['prim_name_s'] = isset($data['prim_name_s']) ? $data['prim_name_s'] : null;
     }
 
     /**
@@ -199,25 +199,25 @@ class ByPrimaryFacet extends FileFacet
 
 
     /**
-     * Gets primary_name
+     * Gets prim_name_s
      *
      * @return \NodeumSDK\Client\Model\ByDateFacetBuckets|null
      */
-    public function getPrimaryName()
+    public function getPrimNameS()
     {
-        return $this->container['primary_name'];
+        return $this->container['prim_name_s'];
     }
 
     /**
-     * Sets primary_name
+     * Sets prim_name_s
      *
-     * @param \NodeumSDK\Client\Model\ByDateFacetBuckets|null $primary_name primary_name
+     * @param \NodeumSDK\Client\Model\ByDateFacetBuckets|null $prim_name_s prim_name_s
      *
      * @return $this
      */
-    public function setPrimaryName($primary_name)
+    public function setPrimNameS($prim_name_s)
     {
-        $this->container['primary_name'] = $primary_name;
+        $this->container['prim_name_s'] = $prim_name_s;
 
         return $this;
     }

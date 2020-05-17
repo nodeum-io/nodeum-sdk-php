@@ -58,7 +58,9 @@ class ByDateFacet implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'count' => 'int',
+        'files_count' => 'int',
         'file_size_sum' => 'int',
+        'cost' => 'float',
         'in_cache' => '\NodeumSDK\Client\Model\FileFacet',
         'less_1_week' => '\NodeumSDK\Client\Model\FileFacet',
         'less_1_month' => '\NodeumSDK\Client\Model\FileFacet',
@@ -76,7 +78,9 @@ class ByDateFacet implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'count' => null,
+        'files_count' => null,
         'file_size_sum' => null,
+        'cost' => null,
         'in_cache' => null,
         'less_1_week' => null,
         'less_1_month' => null,
@@ -115,7 +119,9 @@ class ByDateFacet implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'count' => 'count',
+        'files_count' => 'files_count',
         'file_size_sum' => 'file_size_sum',
+        'cost' => 'cost',
         'in_cache' => 'in_cache',
         'less_1_week' => 'less_1_week',
         'less_1_month' => 'less_1_month',
@@ -133,7 +139,9 @@ class ByDateFacet implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'count' => 'setCount',
+        'files_count' => 'setFilesCount',
         'file_size_sum' => 'setFileSizeSum',
+        'cost' => 'setCost',
         'in_cache' => 'setInCache',
         'less_1_week' => 'setLess1Week',
         'less_1_month' => 'setLess1Month',
@@ -151,7 +159,9 @@ class ByDateFacet implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'count' => 'getCount',
+        'files_count' => 'getFilesCount',
         'file_size_sum' => 'getFileSizeSum',
+        'cost' => 'getCost',
         'in_cache' => 'getInCache',
         'less_1_week' => 'getLess1Week',
         'less_1_month' => 'getLess1Month',
@@ -223,7 +233,9 @@ class ByDateFacet implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['count'] = isset($data['count']) ? $data['count'] : null;
+        $this->container['files_count'] = isset($data['files_count']) ? $data['files_count'] : null;
         $this->container['file_size_sum'] = isset($data['file_size_sum']) ? $data['file_size_sum'] : null;
+        $this->container['cost'] = isset($data['cost']) ? $data['cost'] : null;
         $this->container['in_cache'] = isset($data['in_cache']) ? $data['in_cache'] : null;
         $this->container['less_1_week'] = isset($data['less_1_week']) ? $data['less_1_week'] : null;
         $this->container['less_1_month'] = isset($data['less_1_month']) ? $data['less_1_month'] : null;
@@ -283,6 +295,30 @@ class ByDateFacet implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets files_count
+     *
+     * @return int|null
+     */
+    public function getFilesCount()
+    {
+        return $this->container['files_count'];
+    }
+
+    /**
+     * Sets files_count
+     *
+     * @param int|null $files_count files_count
+     *
+     * @return $this
+     */
+    public function setFilesCount($files_count)
+    {
+        $this->container['files_count'] = $files_count;
+
+        return $this;
+    }
+
+    /**
      * Gets file_size_sum
      *
      * @return int|null
@@ -302,6 +338,30 @@ class ByDateFacet implements ModelInterface, ArrayAccess
     public function setFileSizeSum($file_size_sum)
     {
         $this->container['file_size_sum'] = $file_size_sum;
+
+        return $this;
+    }
+
+    /**
+     * Gets cost
+     *
+     * @return float|null
+     */
+    public function getCost()
+    {
+        return $this->container['cost'];
+    }
+
+    /**
+     * Sets cost
+     *
+     * @param float|null $cost cost
+     *
+     * @return $this
+     */
+    public function setCost($cost)
+    {
+        $this->container['cost'] = $cost;
 
         return $this;
     }

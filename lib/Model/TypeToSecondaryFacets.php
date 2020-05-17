@@ -61,6 +61,7 @@ class TypeToSecondaryFacets implements ModelInterface, ArrayAccess
         'on_secondary_public_cloud' => '\NodeumSDK\Client\Model\BySecondaryTypeFacet',
         'on_secondary_object_cloud' => '\NodeumSDK\Client\Model\BySecondaryTypeFacet',
         'on_secondary_tape' => '\NodeumSDK\Client\Model\BySecondaryTypeFacet',
+        'on_any_secondary' => '\NodeumSDK\Client\Model\BySecondaryTypeFacet',
         'on_no_secondary' => '\NodeumSDK\Client\Model\BySecondaryTypeFacet'
     ];
 
@@ -74,6 +75,7 @@ class TypeToSecondaryFacets implements ModelInterface, ArrayAccess
         'on_secondary_public_cloud' => null,
         'on_secondary_object_cloud' => null,
         'on_secondary_tape' => null,
+        'on_any_secondary' => null,
         'on_no_secondary' => null
     ];
 
@@ -108,6 +110,7 @@ class TypeToSecondaryFacets implements ModelInterface, ArrayAccess
         'on_secondary_public_cloud' => 'on_secondary_public_cloud',
         'on_secondary_object_cloud' => 'on_secondary_object_cloud',
         'on_secondary_tape' => 'on_secondary_tape',
+        'on_any_secondary' => 'on_any_secondary',
         'on_no_secondary' => 'on_no_secondary'
     ];
 
@@ -121,6 +124,7 @@ class TypeToSecondaryFacets implements ModelInterface, ArrayAccess
         'on_secondary_public_cloud' => 'setOnSecondaryPublicCloud',
         'on_secondary_object_cloud' => 'setOnSecondaryObjectCloud',
         'on_secondary_tape' => 'setOnSecondaryTape',
+        'on_any_secondary' => 'setOnAnySecondary',
         'on_no_secondary' => 'setOnNoSecondary'
     ];
 
@@ -134,6 +138,7 @@ class TypeToSecondaryFacets implements ModelInterface, ArrayAccess
         'on_secondary_public_cloud' => 'getOnSecondaryPublicCloud',
         'on_secondary_object_cloud' => 'getOnSecondaryObjectCloud',
         'on_secondary_tape' => 'getOnSecondaryTape',
+        'on_any_secondary' => 'getOnAnySecondary',
         'on_no_secondary' => 'getOnNoSecondary'
     ];
 
@@ -201,6 +206,7 @@ class TypeToSecondaryFacets implements ModelInterface, ArrayAccess
         $this->container['on_secondary_public_cloud'] = isset($data['on_secondary_public_cloud']) ? $data['on_secondary_public_cloud'] : null;
         $this->container['on_secondary_object_cloud'] = isset($data['on_secondary_object_cloud']) ? $data['on_secondary_object_cloud'] : null;
         $this->container['on_secondary_tape'] = isset($data['on_secondary_tape']) ? $data['on_secondary_tape'] : null;
+        $this->container['on_any_secondary'] = isset($data['on_any_secondary']) ? $data['on_any_secondary'] : null;
         $this->container['on_no_secondary'] = isset($data['on_no_secondary']) ? $data['on_no_secondary'] : null;
     }
 
@@ -320,6 +326,30 @@ class TypeToSecondaryFacets implements ModelInterface, ArrayAccess
     public function setOnSecondaryTape($on_secondary_tape)
     {
         $this->container['on_secondary_tape'] = $on_secondary_tape;
+
+        return $this;
+    }
+
+    /**
+     * Gets on_any_secondary
+     *
+     * @return \NodeumSDK\Client\Model\BySecondaryTypeFacet|null
+     */
+    public function getOnAnySecondary()
+    {
+        return $this->container['on_any_secondary'];
+    }
+
+    /**
+     * Sets on_any_secondary
+     *
+     * @param \NodeumSDK\Client\Model\BySecondaryTypeFacet|null $on_any_secondary on_any_secondary
+     *
+     * @return $this
+     */
+    public function setOnAnySecondary($on_any_secondary)
+    {
+        $this->container['on_any_secondary'] = $on_any_secondary;
 
         return $this;
     }

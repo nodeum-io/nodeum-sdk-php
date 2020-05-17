@@ -63,8 +63,10 @@ class Container implements ModelInterface, ArrayAccess
         'quota_total_size' => 'int',
         'quota_on_cache' => 'int',
         'stat_total_files' => 'int',
+        'only_on_cache_file_count' => 'int',
         'stat_total_size' => 'int',
         'stat_size_on_cache' => 'int',
+        'only_on_cache_file_size_sum' => 'int',
         'guest_right' => 'string',
         'last_update' => 'string'
     ];
@@ -81,8 +83,10 @@ class Container implements ModelInterface, ArrayAccess
         'quota_total_size' => null,
         'quota_on_cache' => null,
         'stat_total_files' => null,
+        'only_on_cache_file_count' => null,
         'stat_total_size' => null,
         'stat_size_on_cache' => null,
+        'only_on_cache_file_size_sum' => null,
         'guest_right' => null,
         'last_update' => null
     ];
@@ -120,8 +124,10 @@ class Container implements ModelInterface, ArrayAccess
         'quota_total_size' => 'quota_total_size',
         'quota_on_cache' => 'quota_on_cache',
         'stat_total_files' => 'stat_total_files',
+        'only_on_cache_file_count' => 'only_on_cache_file_count',
         'stat_total_size' => 'stat_total_size',
         'stat_size_on_cache' => 'stat_size_on_cache',
+        'only_on_cache_file_size_sum' => 'only_on_cache_file_size_sum',
         'guest_right' => 'guest_right',
         'last_update' => 'last_update'
     ];
@@ -138,8 +144,10 @@ class Container implements ModelInterface, ArrayAccess
         'quota_total_size' => 'setQuotaTotalSize',
         'quota_on_cache' => 'setQuotaOnCache',
         'stat_total_files' => 'setStatTotalFiles',
+        'only_on_cache_file_count' => 'setOnlyOnCacheFileCount',
         'stat_total_size' => 'setStatTotalSize',
         'stat_size_on_cache' => 'setStatSizeOnCache',
+        'only_on_cache_file_size_sum' => 'setOnlyOnCacheFileSizeSum',
         'guest_right' => 'setGuestRight',
         'last_update' => 'setLastUpdate'
     ];
@@ -156,8 +164,10 @@ class Container implements ModelInterface, ArrayAccess
         'quota_total_size' => 'getQuotaTotalSize',
         'quota_on_cache' => 'getQuotaOnCache',
         'stat_total_files' => 'getStatTotalFiles',
+        'only_on_cache_file_count' => 'getOnlyOnCacheFileCount',
         'stat_total_size' => 'getStatTotalSize',
         'stat_size_on_cache' => 'getStatSizeOnCache',
+        'only_on_cache_file_size_sum' => 'getOnlyOnCacheFileSizeSum',
         'guest_right' => 'getGuestRight',
         'last_update' => 'getLastUpdate'
     ];
@@ -245,8 +255,10 @@ class Container implements ModelInterface, ArrayAccess
         $this->container['quota_total_size'] = isset($data['quota_total_size']) ? $data['quota_total_size'] : null;
         $this->container['quota_on_cache'] = isset($data['quota_on_cache']) ? $data['quota_on_cache'] : null;
         $this->container['stat_total_files'] = isset($data['stat_total_files']) ? $data['stat_total_files'] : null;
+        $this->container['only_on_cache_file_count'] = isset($data['only_on_cache_file_count']) ? $data['only_on_cache_file_count'] : null;
         $this->container['stat_total_size'] = isset($data['stat_total_size']) ? $data['stat_total_size'] : null;
         $this->container['stat_size_on_cache'] = isset($data['stat_size_on_cache']) ? $data['stat_size_on_cache'] : null;
+        $this->container['only_on_cache_file_size_sum'] = isset($data['only_on_cache_file_size_sum']) ? $data['only_on_cache_file_size_sum'] : null;
         $this->container['guest_right'] = isset($data['guest_right']) ? $data['guest_right'] : null;
         $this->container['last_update'] = isset($data['last_update']) ? $data['last_update'] : null;
     }
@@ -428,6 +440,30 @@ class Container implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets only_on_cache_file_count
+     *
+     * @return int|null
+     */
+    public function getOnlyOnCacheFileCount()
+    {
+        return $this->container['only_on_cache_file_count'];
+    }
+
+    /**
+     * Sets only_on_cache_file_count
+     *
+     * @param int|null $only_on_cache_file_count only_on_cache_file_count
+     *
+     * @return $this
+     */
+    public function setOnlyOnCacheFileCount($only_on_cache_file_count)
+    {
+        $this->container['only_on_cache_file_count'] = $only_on_cache_file_count;
+
+        return $this;
+    }
+
+    /**
      * Gets stat_total_size
      *
      * @return int|null
@@ -471,6 +507,30 @@ class Container implements ModelInterface, ArrayAccess
     public function setStatSizeOnCache($stat_size_on_cache)
     {
         $this->container['stat_size_on_cache'] = $stat_size_on_cache;
+
+        return $this;
+    }
+
+    /**
+     * Gets only_on_cache_file_size_sum
+     *
+     * @return int|null
+     */
+    public function getOnlyOnCacheFileSizeSum()
+    {
+        return $this->container['only_on_cache_file_size_sum'];
+    }
+
+    /**
+     * Sets only_on_cache_file_size_sum
+     *
+     * @param int|null $only_on_cache_file_size_sum only_on_cache_file_size_sum
+     *
+     * @return $this
+     */
+    public function setOnlyOnCacheFileSizeSum($only_on_cache_file_size_sum)
+    {
+        $this->container['only_on_cache_file_size_sum'] = $only_on_cache_file_size_sum;
 
         return $this;
     }

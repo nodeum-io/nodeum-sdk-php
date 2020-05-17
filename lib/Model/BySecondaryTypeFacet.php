@@ -55,7 +55,7 @@ class BySecondaryTypeFacet extends ByDateFacet
       * @var string[]
       */
     protected static $openAPITypes = [
-        'secondary_name' => '\NodeumSDK\Client\Model\BySecondaryBuckets'
+        'sec_pool_name_s' => '\NodeumSDK\Client\Model\ByDateFacetBuckets'
     ];
 
     /**
@@ -64,7 +64,7 @@ class BySecondaryTypeFacet extends ByDateFacet
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'secondary_name' => null
+        'sec_pool_name_s' => null
     ];
 
     /**
@@ -94,7 +94,7 @@ class BySecondaryTypeFacet extends ByDateFacet
      * @var string[]
      */
     protected static $attributeMap = [
-        'secondary_name' => 'secondary_name'
+        'sec_pool_name_s' => 'sec_pool_name_s'
     ];
 
     /**
@@ -103,7 +103,7 @@ class BySecondaryTypeFacet extends ByDateFacet
      * @var string[]
      */
     protected static $setters = [
-        'secondary_name' => 'setSecondaryName'
+        'sec_pool_name_s' => 'setSecPoolNameS'
     ];
 
     /**
@@ -112,7 +112,7 @@ class BySecondaryTypeFacet extends ByDateFacet
      * @var string[]
      */
     protected static $getters = [
-        'secondary_name' => 'getSecondaryName'
+        'sec_pool_name_s' => 'getSecPoolNameS'
     ];
 
     /**
@@ -171,7 +171,7 @@ class BySecondaryTypeFacet extends ByDateFacet
     {
         parent::__construct($data);
 
-        $this->container['secondary_name'] = isset($data['secondary_name']) ? $data['secondary_name'] : null;
+        $this->container['sec_pool_name_s'] = isset($data['sec_pool_name_s']) ? $data['sec_pool_name_s'] : null;
     }
 
     /**
@@ -199,25 +199,25 @@ class BySecondaryTypeFacet extends ByDateFacet
 
 
     /**
-     * Gets secondary_name
+     * Gets sec_pool_name_s
      *
-     * @return \NodeumSDK\Client\Model\BySecondaryBuckets|null
+     * @return \NodeumSDK\Client\Model\ByDateFacetBuckets|null
      */
-    public function getSecondaryName()
+    public function getSecPoolNameS()
     {
-        return $this->container['secondary_name'];
+        return $this->container['sec_pool_name_s'];
     }
 
     /**
-     * Sets secondary_name
+     * Sets sec_pool_name_s
      *
-     * @param \NodeumSDK\Client\Model\BySecondaryBuckets|null $secondary_name secondary_name
+     * @param \NodeumSDK\Client\Model\ByDateFacetBuckets|null $sec_pool_name_s sec_pool_name_s
      *
      * @return $this
      */
-    public function setSecondaryName($secondary_name)
+    public function setSecPoolNameS($sec_pool_name_s)
     {
-        $this->container['secondary_name'] = $secondary_name;
+        $this->container['sec_pool_name_s'] = $sec_pool_name_s;
 
         return $this;
     }

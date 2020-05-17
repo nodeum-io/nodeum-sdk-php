@@ -5,7 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **count** | **int** |  | [optional] 
+**files_count** | **int** |  | [optional] 
 **file_size_sum** | **int** |  | [optional] 
+**cost** | **float** |  | [optional] 
 **less_100_kb** | [**\NodeumSDK\Client\Model\ByDateFacet**](ByDateFacet.md) |  | [optional] 
 **less_1_mb** | [**\NodeumSDK\Client\Model\ByDateFacet**](ByDateFacet.md) |  | [optional] 
 **less_10_mb** | [**\NodeumSDK\Client\Model\ByDateFacet**](ByDateFacet.md) |  | [optional] 

@@ -57,7 +57,7 @@ class ByFileExtensionFacetAllOf implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'file_extension' => '\NodeumSDK\Client\Model\ByDateFacetBuckets'
+        'file_extension_s' => '\NodeumSDK\Client\Model\ByDateFacetBuckets'
     ];
 
     /**
@@ -66,7 +66,7 @@ class ByFileExtensionFacetAllOf implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'file_extension' => null
+        'file_extension_s' => null
     ];
 
     /**
@@ -96,7 +96,7 @@ class ByFileExtensionFacetAllOf implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'file_extension' => 'file_extension'
+        'file_extension_s' => 'file_extension_s'
     ];
 
     /**
@@ -105,7 +105,7 @@ class ByFileExtensionFacetAllOf implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'file_extension' => 'setFileExtension'
+        'file_extension_s' => 'setFileExtensionS'
     ];
 
     /**
@@ -114,7 +114,7 @@ class ByFileExtensionFacetAllOf implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'file_extension' => 'getFileExtension'
+        'file_extension_s' => 'getFileExtensionS'
     ];
 
     /**
@@ -177,7 +177,7 @@ class ByFileExtensionFacetAllOf implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['file_extension'] = isset($data['file_extension']) ? $data['file_extension'] : null;
+        $this->container['file_extension_s'] = isset($data['file_extension_s']) ? $data['file_extension_s'] : null;
     }
 
     /**
@@ -205,25 +205,25 @@ class ByFileExtensionFacetAllOf implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets file_extension
+     * Gets file_extension_s
      *
      * @return \NodeumSDK\Client\Model\ByDateFacetBuckets|null
      */
-    public function getFileExtension()
+    public function getFileExtensionS()
     {
-        return $this->container['file_extension'];
+        return $this->container['file_extension_s'];
     }
 
     /**
-     * Sets file_extension
+     * Sets file_extension_s
      *
-     * @param \NodeumSDK\Client\Model\ByDateFacetBuckets|null $file_extension file_extension
+     * @param \NodeumSDK\Client\Model\ByDateFacetBuckets|null $file_extension_s file_extension_s
      *
      * @return $this
      */
-    public function setFileExtension($file_extension)
+    public function setFileExtensionS($file_extension_s)
     {
-        $this->container['file_extension'] = $file_extension;
+        $this->container['file_extension_s'] = $file_extension_s;
 
         return $this;
     }

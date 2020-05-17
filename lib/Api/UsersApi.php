@@ -393,6 +393,283 @@ class UsersApi
     }
 
     /**
+     * Operation createConfiguration
+     *
+     * Creates a new configuration value for current user.
+     *
+     * @param  \NodeumSDK\Client\Model\UserConfiguration $configuration_body configuration_body (required)
+     *
+     * @throws \NodeumSDK\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \NodeumSDK\Client\Model\UserConfiguration
+     */
+    public function createConfiguration($configuration_body)
+    {
+        list($response) = $this->createConfigurationWithHttpInfo($configuration_body);
+        return $response;
+    }
+
+    /**
+     * Operation createConfigurationWithHttpInfo
+     *
+     * Creates a new configuration value for current user.
+     *
+     * @param  \NodeumSDK\Client\Model\UserConfiguration $configuration_body (required)
+     *
+     * @throws \NodeumSDK\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \NodeumSDK\Client\Model\UserConfiguration, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createConfigurationWithHttpInfo($configuration_body)
+    {
+        $request = $this->createConfigurationRequest($configuration_body);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 201:
+                    if ('\NodeumSDK\Client\Model\UserConfiguration' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\NodeumSDK\Client\Model\UserConfiguration', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\NodeumSDK\Client\Model\UserConfiguration';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = (string) $responseBody;
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\NodeumSDK\Client\Model\UserConfiguration',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createConfigurationAsync
+     *
+     * Creates a new configuration value for current user.
+     *
+     * @param  \NodeumSDK\Client\Model\UserConfiguration $configuration_body (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createConfigurationAsync($configuration_body)
+    {
+        return $this->createConfigurationAsyncWithHttpInfo($configuration_body)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createConfigurationAsyncWithHttpInfo
+     *
+     * Creates a new configuration value for current user.
+     *
+     * @param  \NodeumSDK\Client\Model\UserConfiguration $configuration_body (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createConfigurationAsyncWithHttpInfo($configuration_body)
+    {
+        $returnType = '\NodeumSDK\Client\Model\UserConfiguration';
+        $request = $this->createConfigurationRequest($configuration_body);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createConfiguration'
+     *
+     * @param  \NodeumSDK\Client\Model\UserConfiguration $configuration_body (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function createConfigurationRequest($configuration_body)
+    {
+        // verify the required parameter 'configuration_body' is set
+        if ($configuration_body === null || (is_array($configuration_body) && count($configuration_body) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $configuration_body when calling createConfiguration'
+            );
+        }
+
+        $resourcePath = '/users/me/configurations';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+        // body params
+        $_tempBody = null;
+        if (isset($configuration_body)) {
+            $_tempBody = $configuration_body;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation destroyApiKey
      *
      * Destroys a specific API Key.
@@ -549,6 +826,240 @@ class UsersApi
             $resourcePath = str_replace(
                 '{' . 'api_key_id' . '}',
                 ObjectSerializer::toPathValue($api_key_id),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                []
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                [],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'DELETE',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation destroyConfiguration
+     *
+     * Destroys a specific configuration value.
+     *
+     * @param  string $configuration_id Numeric ID, or key of configuration. (required)
+     *
+     * @throws \NodeumSDK\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function destroyConfiguration($configuration_id)
+    {
+        $this->destroyConfigurationWithHttpInfo($configuration_id);
+    }
+
+    /**
+     * Operation destroyConfigurationWithHttpInfo
+     *
+     * Destroys a specific configuration value.
+     *
+     * @param  string $configuration_id Numeric ID, or key of configuration. (required)
+     *
+     * @throws \NodeumSDK\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function destroyConfigurationWithHttpInfo($configuration_id)
+    {
+        $request = $this->destroyConfigurationRequest($configuration_id);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            return [null, $statusCode, $response->getHeaders()];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation destroyConfigurationAsync
+     *
+     * Destroys a specific configuration value.
+     *
+     * @param  string $configuration_id Numeric ID, or key of configuration. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function destroyConfigurationAsync($configuration_id)
+    {
+        return $this->destroyConfigurationAsyncWithHttpInfo($configuration_id)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation destroyConfigurationAsyncWithHttpInfo
+     *
+     * Destroys a specific configuration value.
+     *
+     * @param  string $configuration_id Numeric ID, or key of configuration. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function destroyConfigurationAsyncWithHttpInfo($configuration_id)
+    {
+        $returnType = '';
+        $request = $this->destroyConfigurationRequest($configuration_id);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'destroyConfiguration'
+     *
+     * @param  string $configuration_id Numeric ID, or key of configuration. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function destroyConfigurationRequest($configuration_id)
+    {
+        // verify the required parameter 'configuration_id' is set
+        if ($configuration_id === null || (is_array($configuration_id) && count($configuration_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $configuration_id when calling destroyConfiguration'
+            );
+        }
+
+        $resourcePath = '/users/me/configurations/{configuration_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($configuration_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'configuration_id' . '}',
+                ObjectSerializer::toPathValue($configuration_id),
                 $resourcePath
             );
         }
@@ -817,6 +1328,293 @@ class UsersApi
     {
 
         $resourcePath = '/users/me/api_keys';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if (is_array($limit)) {
+            $limit = ObjectSerializer::serializeCollection($limit, '', true);
+        }
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
+        }
+        // query params
+        if (is_array($offset)) {
+            $offset = ObjectSerializer::serializeCollection($offset, '', true);
+        }
+        if ($offset !== null) {
+            $queryParams['offset'] = $offset;
+        }
+
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation indexConfigurations
+     *
+     * Lists all configurations of current user.
+     *
+     * @param  int $limit The number of items to display for pagination. (optional)
+     * @param  int $offset The number of items to skip for pagination. (optional)
+     *
+     * @throws \NodeumSDK\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \NodeumSDK\Client\Model\UserConfigurationCollection
+     */
+    public function indexConfigurations($limit = null, $offset = null)
+    {
+        list($response) = $this->indexConfigurationsWithHttpInfo($limit, $offset);
+        return $response;
+    }
+
+    /**
+     * Operation indexConfigurationsWithHttpInfo
+     *
+     * Lists all configurations of current user.
+     *
+     * @param  int $limit The number of items to display for pagination. (optional)
+     * @param  int $offset The number of items to skip for pagination. (optional)
+     *
+     * @throws \NodeumSDK\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \NodeumSDK\Client\Model\UserConfigurationCollection, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function indexConfigurationsWithHttpInfo($limit = null, $offset = null)
+    {
+        $request = $this->indexConfigurationsRequest($limit, $offset);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\NodeumSDK\Client\Model\UserConfigurationCollection' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\NodeumSDK\Client\Model\UserConfigurationCollection', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\NodeumSDK\Client\Model\UserConfigurationCollection';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = (string) $responseBody;
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\NodeumSDK\Client\Model\UserConfigurationCollection',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation indexConfigurationsAsync
+     *
+     * Lists all configurations of current user.
+     *
+     * @param  int $limit The number of items to display for pagination. (optional)
+     * @param  int $offset The number of items to skip for pagination. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function indexConfigurationsAsync($limit = null, $offset = null)
+    {
+        return $this->indexConfigurationsAsyncWithHttpInfo($limit, $offset)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation indexConfigurationsAsyncWithHttpInfo
+     *
+     * Lists all configurations of current user.
+     *
+     * @param  int $limit The number of items to display for pagination. (optional)
+     * @param  int $offset The number of items to skip for pagination. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function indexConfigurationsAsyncWithHttpInfo($limit = null, $offset = null)
+    {
+        $returnType = '\NodeumSDK\Client\Model\UserConfigurationCollection';
+        $request = $this->indexConfigurationsRequest($limit, $offset);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'indexConfigurations'
+     *
+     * @param  int $limit The number of items to display for pagination. (optional)
+     * @param  int $offset The number of items to skip for pagination. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function indexConfigurationsRequest($limit = null, $offset = null)
+    {
+
+        $resourcePath = '/users/me/configurations';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1722,6 +2520,288 @@ class UsersApi
     }
 
     /**
+     * Operation showConfiguration
+     *
+     * Displays a specific configuration value.
+     *
+     * @param  string $configuration_id Numeric ID, or key of configuration. (required)
+     *
+     * @throws \NodeumSDK\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \NodeumSDK\Client\Model\UserConfiguration
+     */
+    public function showConfiguration($configuration_id)
+    {
+        list($response) = $this->showConfigurationWithHttpInfo($configuration_id);
+        return $response;
+    }
+
+    /**
+     * Operation showConfigurationWithHttpInfo
+     *
+     * Displays a specific configuration value.
+     *
+     * @param  string $configuration_id Numeric ID, or key of configuration. (required)
+     *
+     * @throws \NodeumSDK\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \NodeumSDK\Client\Model\UserConfiguration, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function showConfigurationWithHttpInfo($configuration_id)
+    {
+        $request = $this->showConfigurationRequest($configuration_id);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\NodeumSDK\Client\Model\UserConfiguration' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\NodeumSDK\Client\Model\UserConfiguration', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\NodeumSDK\Client\Model\UserConfiguration';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = (string) $responseBody;
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\NodeumSDK\Client\Model\UserConfiguration',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation showConfigurationAsync
+     *
+     * Displays a specific configuration value.
+     *
+     * @param  string $configuration_id Numeric ID, or key of configuration. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function showConfigurationAsync($configuration_id)
+    {
+        return $this->showConfigurationAsyncWithHttpInfo($configuration_id)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation showConfigurationAsyncWithHttpInfo
+     *
+     * Displays a specific configuration value.
+     *
+     * @param  string $configuration_id Numeric ID, or key of configuration. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function showConfigurationAsyncWithHttpInfo($configuration_id)
+    {
+        $returnType = '\NodeumSDK\Client\Model\UserConfiguration';
+        $request = $this->showConfigurationRequest($configuration_id);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'showConfiguration'
+     *
+     * @param  string $configuration_id Numeric ID, or key of configuration. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function showConfigurationRequest($configuration_id)
+    {
+        // verify the required parameter 'configuration_id' is set
+        if ($configuration_id === null || (is_array($configuration_id) && count($configuration_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $configuration_id when calling showConfiguration'
+            );
+        }
+
+        $resourcePath = '/users/me/configurations/{configuration_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($configuration_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'configuration_id' . '}',
+                ObjectSerializer::toPathValue($configuration_id),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation updateApiKey
      *
      * Updates a specific API Key.
@@ -1945,6 +3025,302 @@ class UsersApi
         $_tempBody = null;
         if (isset($api_key_body)) {
             $_tempBody = $api_key_body;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation updateConfiguration
+     *
+     * Updates a specific configuration value.
+     *
+     * @param  string $configuration_id Numeric ID, or key of configuration. (required)
+     * @param  \NodeumSDK\Client\Model\UserConfiguration $configuration_body configuration_body (required)
+     *
+     * @throws \NodeumSDK\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \NodeumSDK\Client\Model\UserConfiguration
+     */
+    public function updateConfiguration($configuration_id, $configuration_body)
+    {
+        list($response) = $this->updateConfigurationWithHttpInfo($configuration_id, $configuration_body);
+        return $response;
+    }
+
+    /**
+     * Operation updateConfigurationWithHttpInfo
+     *
+     * Updates a specific configuration value.
+     *
+     * @param  string $configuration_id Numeric ID, or key of configuration. (required)
+     * @param  \NodeumSDK\Client\Model\UserConfiguration $configuration_body (required)
+     *
+     * @throws \NodeumSDK\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \NodeumSDK\Client\Model\UserConfiguration, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function updateConfigurationWithHttpInfo($configuration_id, $configuration_body)
+    {
+        $request = $this->updateConfigurationRequest($configuration_id, $configuration_body);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\NodeumSDK\Client\Model\UserConfiguration' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\NodeumSDK\Client\Model\UserConfiguration', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\NodeumSDK\Client\Model\UserConfiguration';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = (string) $responseBody;
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\NodeumSDK\Client\Model\UserConfiguration',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation updateConfigurationAsync
+     *
+     * Updates a specific configuration value.
+     *
+     * @param  string $configuration_id Numeric ID, or key of configuration. (required)
+     * @param  \NodeumSDK\Client\Model\UserConfiguration $configuration_body (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateConfigurationAsync($configuration_id, $configuration_body)
+    {
+        return $this->updateConfigurationAsyncWithHttpInfo($configuration_id, $configuration_body)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation updateConfigurationAsyncWithHttpInfo
+     *
+     * Updates a specific configuration value.
+     *
+     * @param  string $configuration_id Numeric ID, or key of configuration. (required)
+     * @param  \NodeumSDK\Client\Model\UserConfiguration $configuration_body (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateConfigurationAsyncWithHttpInfo($configuration_id, $configuration_body)
+    {
+        $returnType = '\NodeumSDK\Client\Model\UserConfiguration';
+        $request = $this->updateConfigurationRequest($configuration_id, $configuration_body);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'updateConfiguration'
+     *
+     * @param  string $configuration_id Numeric ID, or key of configuration. (required)
+     * @param  \NodeumSDK\Client\Model\UserConfiguration $configuration_body (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function updateConfigurationRequest($configuration_id, $configuration_body)
+    {
+        // verify the required parameter 'configuration_id' is set
+        if ($configuration_id === null || (is_array($configuration_id) && count($configuration_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $configuration_id when calling updateConfiguration'
+            );
+        }
+        // verify the required parameter 'configuration_body' is set
+        if ($configuration_body === null || (is_array($configuration_body) && count($configuration_body) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $configuration_body when calling updateConfiguration'
+            );
+        }
+
+        $resourcePath = '/users/me/configurations/{configuration_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($configuration_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'configuration_id' . '}',
+                ObjectSerializer::toPathValue($configuration_id),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+        if (isset($configuration_body)) {
+            $_tempBody = $configuration_body;
         }
 
         if ($multipart) {

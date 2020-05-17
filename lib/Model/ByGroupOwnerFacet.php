@@ -55,7 +55,7 @@ class ByGroupOwnerFacet extends FileFacet
       * @var string[]
       */
     protected static $openAPITypes = [
-        'group_owner_id' => '\NodeumSDK\Client\Model\ByDateFacetBuckets'
+        'group_owner_id_l' => '\NodeumSDK\Client\Model\ByDateFacetBuckets'
     ];
 
     /**
@@ -64,7 +64,7 @@ class ByGroupOwnerFacet extends FileFacet
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'group_owner_id' => null
+        'group_owner_id_l' => null
     ];
 
     /**
@@ -94,7 +94,7 @@ class ByGroupOwnerFacet extends FileFacet
      * @var string[]
      */
     protected static $attributeMap = [
-        'group_owner_id' => 'group_owner_id'
+        'group_owner_id_l' => 'group_owner_id_l'
     ];
 
     /**
@@ -103,7 +103,7 @@ class ByGroupOwnerFacet extends FileFacet
      * @var string[]
      */
     protected static $setters = [
-        'group_owner_id' => 'setGroupOwnerId'
+        'group_owner_id_l' => 'setGroupOwnerIdL'
     ];
 
     /**
@@ -112,7 +112,7 @@ class ByGroupOwnerFacet extends FileFacet
      * @var string[]
      */
     protected static $getters = [
-        'group_owner_id' => 'getGroupOwnerId'
+        'group_owner_id_l' => 'getGroupOwnerIdL'
     ];
 
     /**
@@ -171,7 +171,7 @@ class ByGroupOwnerFacet extends FileFacet
     {
         parent::__construct($data);
 
-        $this->container['group_owner_id'] = isset($data['group_owner_id']) ? $data['group_owner_id'] : null;
+        $this->container['group_owner_id_l'] = isset($data['group_owner_id_l']) ? $data['group_owner_id_l'] : null;
     }
 
     /**
@@ -199,25 +199,25 @@ class ByGroupOwnerFacet extends FileFacet
 
 
     /**
-     * Gets group_owner_id
+     * Gets group_owner_id_l
      *
      * @return \NodeumSDK\Client\Model\ByDateFacetBuckets|null
      */
-    public function getGroupOwnerId()
+    public function getGroupOwnerIdL()
     {
-        return $this->container['group_owner_id'];
+        return $this->container['group_owner_id_l'];
     }
 
     /**
-     * Sets group_owner_id
+     * Sets group_owner_id_l
      *
-     * @param \NodeumSDK\Client\Model\ByDateFacetBuckets|null $group_owner_id group_owner_id
+     * @param \NodeumSDK\Client\Model\ByDateFacetBuckets|null $group_owner_id_l group_owner_id_l
      *
      * @return $this
      */
-    public function setGroupOwnerId($group_owner_id)
+    public function setGroupOwnerIdL($group_owner_id_l)
     {
-        $this->container['group_owner_id'] = $group_owner_id;
+        $this->container['group_owner_id_l'] = $group_owner_id_l;
 
         return $this;
     }
