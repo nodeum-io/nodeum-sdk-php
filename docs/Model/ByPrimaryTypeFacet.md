@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**count** | **int** |  | [optional] 
-**files_count** | **int** |  | [optional] 
-**file_size_sum** | **int** |  | [optional] 
-**cost** | **float** |  | [optional] 
+**count** | **int** |  | [optional] [readonly] 
+**files_count** | **int** |  | [optional] [readonly] 
+**file_size_sum** | **int** |  | [optional] [readonly] 
+**cost** | **float** |  | [optional] [readonly] 
 **in_cache** | [**\NodeumSDK\Client\Model\FileFacet**](FileFacet.md) |  | [optional] 
 **less_1_week** | [**\NodeumSDK\Client\Model\FileFacet**](FileFacet.md) |  | [optional] 
 **less_1_month** | [**\NodeumSDK\Client\Model\FileFacet**](FileFacet.md) |  | [optional] 

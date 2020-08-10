@@ -18,6 +18,7 @@ Method | HTTP request | Description
 [**updateCloudBucket**](CloudBucketsApi.md#updateCloudBucket) | **PUT** /cloud_buckets/{cloud_bucket_id} | Updates a specific cloud bucket.
 [**updateCloudBucketByCloudConnector**](CloudBucketsApi.md#updateCloudBucketByCloudConnector) | **PUT** /cloud_connectors/{cloud_connector_id}/cloud_buckets/{cloud_bucket_id} | Updates a specific cloud bucket.
 [**updateCloudBucketByPool**](CloudBucketsApi.md#updateCloudBucketByPool) | **PUT** /pools/{pool_id}/cloud_buckets/{cloud_bucket_id} | Updates a specific cloud bucket.
+[**updateConfigFileCloudBucket**](CloudBucketsApi.md#updateConfigFileCloudBucket) | **PUT** /cloud_buckets/{cloud_bucket_id}/config_file | Updates a specific cloud bucket.
 
 
 
@@ -1034,6 +1035,76 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
+
+
+## updateConfigFileCloudBucket
+
+> string updateConfigFileCloudBucket($cloud_bucket_id, $config_file)
+
+Updates a specific cloud bucket.
+
+**API Key Scope**: cloud_buckets / update_config_file
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure HTTP basic authorization: BasicAuth
+$config = NodeumSDK\Client\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+
+// Configure API key authorization: BearerAuth
+$config = NodeumSDK\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = NodeumSDK\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new NodeumSDK\Client\Api\CloudBucketsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$cloud_bucket_id = 'cloud_bucket_id_example'; // string | Numeric ID or name of cloud bucket.
+$config_file = "/path/to/file.txt"; // \SplFileObject | Config file to upload.
+
+try {
+    $result = $apiInstance->updateConfigFileCloudBucket($cloud_bucket_id, $config_file);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling CloudBucketsApi->updateConfigFileCloudBucket: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **cloud_bucket_id** | **string**| Numeric ID or name of cloud bucket. |
+ **config_file** | **\SplFileObject****\SplFileObject**| Config file to upload. |
+
+### Return type
+
+**string**
+
+### Authorization
+
+[BasicAuth](../../README.md#BasicAuth), [BearerAuth](../../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: multipart/form-data
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)

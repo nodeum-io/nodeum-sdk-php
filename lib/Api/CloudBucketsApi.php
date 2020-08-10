@@ -4719,6 +4719,324 @@ class CloudBucketsApi
     }
 
     /**
+     * Operation updateConfigFileCloudBucket
+     *
+     * Updates a specific cloud bucket.
+     *
+     * @param  string $cloud_bucket_id Numeric ID or name of cloud bucket. (required)
+     * @param  \SplFileObject $config_file Config file to upload. (required)
+     *
+     * @throws \NodeumSDK\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return string|\NodeumSDK\Client\Model\Error
+     */
+    public function updateConfigFileCloudBucket($cloud_bucket_id, $config_file)
+    {
+        list($response) = $this->updateConfigFileCloudBucketWithHttpInfo($cloud_bucket_id, $config_file);
+        return $response;
+    }
+
+    /**
+     * Operation updateConfigFileCloudBucketWithHttpInfo
+     *
+     * Updates a specific cloud bucket.
+     *
+     * @param  string $cloud_bucket_id Numeric ID or name of cloud bucket. (required)
+     * @param  \SplFileObject $config_file Config file to upload. (required)
+     *
+     * @throws \NodeumSDK\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of string|\NodeumSDK\Client\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function updateConfigFileCloudBucketWithHttpInfo($cloud_bucket_id, $config_file)
+    {
+        $request = $this->updateConfigFileCloudBucketRequest($cloud_bucket_id, $config_file);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('string' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'string', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\NodeumSDK\Client\Model\Error' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\NodeumSDK\Client\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'string';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = (string) $responseBody;
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'string',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\NodeumSDK\Client\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation updateConfigFileCloudBucketAsync
+     *
+     * Updates a specific cloud bucket.
+     *
+     * @param  string $cloud_bucket_id Numeric ID or name of cloud bucket. (required)
+     * @param  \SplFileObject $config_file Config file to upload. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateConfigFileCloudBucketAsync($cloud_bucket_id, $config_file)
+    {
+        return $this->updateConfigFileCloudBucketAsyncWithHttpInfo($cloud_bucket_id, $config_file)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation updateConfigFileCloudBucketAsyncWithHttpInfo
+     *
+     * Updates a specific cloud bucket.
+     *
+     * @param  string $cloud_bucket_id Numeric ID or name of cloud bucket. (required)
+     * @param  \SplFileObject $config_file Config file to upload. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateConfigFileCloudBucketAsyncWithHttpInfo($cloud_bucket_id, $config_file)
+    {
+        $returnType = 'string';
+        $request = $this->updateConfigFileCloudBucketRequest($cloud_bucket_id, $config_file);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'updateConfigFileCloudBucket'
+     *
+     * @param  string $cloud_bucket_id Numeric ID or name of cloud bucket. (required)
+     * @param  \SplFileObject $config_file Config file to upload. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function updateConfigFileCloudBucketRequest($cloud_bucket_id, $config_file)
+    {
+        // verify the required parameter 'cloud_bucket_id' is set
+        if ($cloud_bucket_id === null || (is_array($cloud_bucket_id) && count($cloud_bucket_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $cloud_bucket_id when calling updateConfigFileCloudBucket'
+            );
+        }
+        // verify the required parameter 'config_file' is set
+        if ($config_file === null || (is_array($config_file) && count($config_file) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $config_file when calling updateConfigFileCloudBucket'
+            );
+        }
+
+        $resourcePath = '/cloud_buckets/{cloud_bucket_id}/config_file';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($cloud_bucket_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'cloud_bucket_id' . '}',
+                ObjectSerializer::toPathValue($cloud_bucket_id),
+                $resourcePath
+            );
+        }
+
+        // form params
+        if ($config_file !== null) {
+            $multipart = true;
+            $formParams['config_file'] = \GuzzleHttp\Psr7\try_fopen(ObjectSerializer::toFormValue($config_file), 'rb');
+        }
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['multipart/form-data']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Create http client option
      *
      * @throws \RuntimeException on file opening failure

@@ -64,7 +64,8 @@ class CloudConnector implements ModelInterface, ArrayAccess
         'provider' => 'string',
         'region' => 'string',
         'access_key' => 'string',
-        'secret_key' => 'string'
+        'secret_key' => 'string',
+        'options' => 'string'
     ];
 
     /**
@@ -80,7 +81,8 @@ class CloudConnector implements ModelInterface, ArrayAccess
         'provider' => null,
         'region' => null,
         'access_key' => null,
-        'secret_key' => null
+        'secret_key' => null,
+        'options' => null
     ];
 
     /**
@@ -117,7 +119,8 @@ class CloudConnector implements ModelInterface, ArrayAccess
         'provider' => 'provider',
         'region' => 'region',
         'access_key' => 'access_key',
-        'secret_key' => 'secret_key'
+        'secret_key' => 'secret_key',
+        'options' => 'options'
     ];
 
     /**
@@ -133,7 +136,8 @@ class CloudConnector implements ModelInterface, ArrayAccess
         'provider' => 'setProvider',
         'region' => 'setRegion',
         'access_key' => 'setAccessKey',
-        'secret_key' => 'setSecretKey'
+        'secret_key' => 'setSecretKey',
+        'options' => 'setOptions'
     ];
 
     /**
@@ -149,7 +153,8 @@ class CloudConnector implements ModelInterface, ArrayAccess
         'provider' => 'getProvider',
         'region' => 'getRegion',
         'access_key' => 'getAccessKey',
-        'secret_key' => 'getSecretKey'
+        'secret_key' => 'getSecretKey',
+        'options' => 'getOptions'
     ];
 
     /**
@@ -201,6 +206,7 @@ class CloudConnector implements ModelInterface, ArrayAccess
     const PROVIDER_AZURE = 'azure';
     const PROVIDER_GOOGLE_CLOUD_STORAGE = 'google_cloud_storage';
     const PROVIDER_OPENSTACK_SWIFT = 'openstack_swift';
+    const PROVIDER_WASABI = 'wasabi';
     
 
     
@@ -220,6 +226,7 @@ class CloudConnector implements ModelInterface, ArrayAccess
             self::PROVIDER_AZURE,
             self::PROVIDER_GOOGLE_CLOUD_STORAGE,
             self::PROVIDER_OPENSTACK_SWIFT,
+            self::PROVIDER_WASABI,
         ];
     }
     
@@ -247,6 +254,7 @@ class CloudConnector implements ModelInterface, ArrayAccess
         $this->container['region'] = isset($data['region']) ? $data['region'] : null;
         $this->container['access_key'] = isset($data['access_key']) ? $data['access_key'] : null;
         $this->container['secret_key'] = isset($data['secret_key']) ? $data['secret_key'] : null;
+        $this->container['options'] = isset($data['options']) ? $data['options'] : null;
     }
 
     /**
@@ -478,6 +486,30 @@ class CloudConnector implements ModelInterface, ArrayAccess
     public function setSecretKey($secret_key)
     {
         $this->container['secret_key'] = $secret_key;
+
+        return $this;
+    }
+
+    /**
+     * Gets options
+     *
+     * @return string|null
+     */
+    public function getOptions()
+    {
+        return $this->container['options'];
+    }
+
+    /**
+     * Sets options
+     *
+     * @param string|null $options S3FS mounting options, separated by comma
+     *
+     * @return $this
+     */
+    public function setOptions($options)
+    {
+        $this->container['options'] = $options;
 
         return $this;
     }

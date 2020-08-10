@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**count** | **int** |  | [optional] 
+**count** | **int** |  | [optional] [readonly] 
 **pool_type_i** | [**\NodeumSDK\Client\Model\ByTypeFacetBuckets**](ByTypeFacetBuckets.md) |  | [optional] 
 **pool_content_i** | [**\NodeumSDK\Client\Model\ByTypeFacetBuckets**](ByTypeFacetBuckets.md) |  | [optional] 
 

@@ -1061,6 +1061,329 @@ class StatisticsApi
     }
 
     /**
+     * Operation statisticsByMetadata
+     *
+     * Get statistics about files, grouped by metadata
+     *
+     * @param  string $q Solr query (optional)
+     * @param  string[] $fq Solr filter query  Multiple query can be separated by &#x60;|&#x60;. (optional)
+     * @param  string $date_attr Type of date to facet on (optional)
+     * @param  string $sort Sort results of facet (optional, default to 'count')
+     * @param  int $limit Limit results of facet (optional, default to 10)
+     *
+     * @throws \NodeumSDK\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \NodeumSDK\Client\Model\ByMetadataFacet
+     */
+    public function statisticsByMetadata($q = null, $fq = null, $date_attr = null, $sort = 'count', $limit = 10)
+    {
+        list($response) = $this->statisticsByMetadataWithHttpInfo($q, $fq, $date_attr, $sort, $limit);
+        return $response;
+    }
+
+    /**
+     * Operation statisticsByMetadataWithHttpInfo
+     *
+     * Get statistics about files, grouped by metadata
+     *
+     * @param  string $q Solr query (optional)
+     * @param  string[] $fq Solr filter query  Multiple query can be separated by &#x60;|&#x60;. (optional)
+     * @param  string $date_attr Type of date to facet on (optional)
+     * @param  string $sort Sort results of facet (optional, default to 'count')
+     * @param  int $limit Limit results of facet (optional, default to 10)
+     *
+     * @throws \NodeumSDK\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \NodeumSDK\Client\Model\ByMetadataFacet, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function statisticsByMetadataWithHttpInfo($q = null, $fq = null, $date_attr = null, $sort = 'count', $limit = 10)
+    {
+        $request = $this->statisticsByMetadataRequest($q, $fq, $date_attr, $sort, $limit);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\NodeumSDK\Client\Model\ByMetadataFacet' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\NodeumSDK\Client\Model\ByMetadataFacet', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\NodeumSDK\Client\Model\ByMetadataFacet';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = (string) $responseBody;
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\NodeumSDK\Client\Model\ByMetadataFacet',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation statisticsByMetadataAsync
+     *
+     * Get statistics about files, grouped by metadata
+     *
+     * @param  string $q Solr query (optional)
+     * @param  string[] $fq Solr filter query  Multiple query can be separated by &#x60;|&#x60;. (optional)
+     * @param  string $date_attr Type of date to facet on (optional)
+     * @param  string $sort Sort results of facet (optional, default to 'count')
+     * @param  int $limit Limit results of facet (optional, default to 10)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function statisticsByMetadataAsync($q = null, $fq = null, $date_attr = null, $sort = 'count', $limit = 10)
+    {
+        return $this->statisticsByMetadataAsyncWithHttpInfo($q, $fq, $date_attr, $sort, $limit)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation statisticsByMetadataAsyncWithHttpInfo
+     *
+     * Get statistics about files, grouped by metadata
+     *
+     * @param  string $q Solr query (optional)
+     * @param  string[] $fq Solr filter query  Multiple query can be separated by &#x60;|&#x60;. (optional)
+     * @param  string $date_attr Type of date to facet on (optional)
+     * @param  string $sort Sort results of facet (optional, default to 'count')
+     * @param  int $limit Limit results of facet (optional, default to 10)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function statisticsByMetadataAsyncWithHttpInfo($q = null, $fq = null, $date_attr = null, $sort = 'count', $limit = 10)
+    {
+        $returnType = '\NodeumSDK\Client\Model\ByMetadataFacet';
+        $request = $this->statisticsByMetadataRequest($q, $fq, $date_attr, $sort, $limit);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'statisticsByMetadata'
+     *
+     * @param  string $q Solr query (optional)
+     * @param  string[] $fq Solr filter query  Multiple query can be separated by &#x60;|&#x60;. (optional)
+     * @param  string $date_attr Type of date to facet on (optional)
+     * @param  string $sort Sort results of facet (optional, default to 'count')
+     * @param  int $limit Limit results of facet (optional, default to 10)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function statisticsByMetadataRequest($q = null, $fq = null, $date_attr = null, $sort = 'count', $limit = 10)
+    {
+
+        $resourcePath = '/statistics/by_metadata';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if (is_array($q)) {
+            $q = ObjectSerializer::serializeCollection($q, '', true);
+        }
+        if ($q !== null) {
+            $queryParams['q'] = $q;
+        }
+        // query params
+        if (is_array($fq)) {
+            $fq = ObjectSerializer::serializeCollection($fq, 'pipeDelimited', true);
+        }
+        if ($fq !== null) {
+            $queryParams['fq'] = $fq;
+        }
+        // query params
+        if (is_array($date_attr)) {
+            $date_attr = ObjectSerializer::serializeCollection($date_attr, '', true);
+        }
+        if ($date_attr !== null) {
+            $queryParams['date_attr'] = $date_attr;
+        }
+        // query params
+        if (is_array($sort)) {
+            $sort = ObjectSerializer::serializeCollection($sort, '', true);
+        }
+        if ($sort !== null) {
+            $queryParams['sort'] = $sort;
+        }
+        // query params
+        if (is_array($limit)) {
+            $limit = ObjectSerializer::serializeCollection($limit, '', true);
+        }
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
+        }
+
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation statisticsByPrimaryCloud
      *
      * Get statistics about files, grouped by primary Cloud
@@ -4476,6 +4799,317 @@ class StatisticsApi
         }
         if ($fq !== null) {
             $queryParams['fq'] = $fq;
+        }
+
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if (!empty($this->config->getUsername()) || !(empty($this->config->getPassword()))) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation statisticsTaskByMetadata
+     *
+     * Get statistics about tasks executions, grouped by metadata
+     *
+     * @param  string $q Solr query (optional)
+     * @param  string[] $fq Solr filter query  Multiple query can be separated by &#x60;|&#x60;. (optional)
+     * @param  string $sort Sort results of facet on task (optional, default to 'count')
+     * @param  int $limit Limit results of facet (optional, default to 10)
+     *
+     * @throws \NodeumSDK\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \NodeumSDK\Client\Model\ByTaskMetadataFacet
+     */
+    public function statisticsTaskByMetadata($q = null, $fq = null, $sort = 'count', $limit = 10)
+    {
+        list($response) = $this->statisticsTaskByMetadataWithHttpInfo($q, $fq, $sort, $limit);
+        return $response;
+    }
+
+    /**
+     * Operation statisticsTaskByMetadataWithHttpInfo
+     *
+     * Get statistics about tasks executions, grouped by metadata
+     *
+     * @param  string $q Solr query (optional)
+     * @param  string[] $fq Solr filter query  Multiple query can be separated by &#x60;|&#x60;. (optional)
+     * @param  string $sort Sort results of facet on task (optional, default to 'count')
+     * @param  int $limit Limit results of facet (optional, default to 10)
+     *
+     * @throws \NodeumSDK\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \NodeumSDK\Client\Model\ByTaskMetadataFacet, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function statisticsTaskByMetadataWithHttpInfo($q = null, $fq = null, $sort = 'count', $limit = 10)
+    {
+        $request = $this->statisticsTaskByMetadataRequest($q, $fq, $sort, $limit);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\NodeumSDK\Client\Model\ByTaskMetadataFacet' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\NodeumSDK\Client\Model\ByTaskMetadataFacet', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\NodeumSDK\Client\Model\ByTaskMetadataFacet';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = (string) $responseBody;
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\NodeumSDK\Client\Model\ByTaskMetadataFacet',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation statisticsTaskByMetadataAsync
+     *
+     * Get statistics about tasks executions, grouped by metadata
+     *
+     * @param  string $q Solr query (optional)
+     * @param  string[] $fq Solr filter query  Multiple query can be separated by &#x60;|&#x60;. (optional)
+     * @param  string $sort Sort results of facet on task (optional, default to 'count')
+     * @param  int $limit Limit results of facet (optional, default to 10)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function statisticsTaskByMetadataAsync($q = null, $fq = null, $sort = 'count', $limit = 10)
+    {
+        return $this->statisticsTaskByMetadataAsyncWithHttpInfo($q, $fq, $sort, $limit)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation statisticsTaskByMetadataAsyncWithHttpInfo
+     *
+     * Get statistics about tasks executions, grouped by metadata
+     *
+     * @param  string $q Solr query (optional)
+     * @param  string[] $fq Solr filter query  Multiple query can be separated by &#x60;|&#x60;. (optional)
+     * @param  string $sort Sort results of facet on task (optional, default to 'count')
+     * @param  int $limit Limit results of facet (optional, default to 10)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function statisticsTaskByMetadataAsyncWithHttpInfo($q = null, $fq = null, $sort = 'count', $limit = 10)
+    {
+        $returnType = '\NodeumSDK\Client\Model\ByTaskMetadataFacet';
+        $request = $this->statisticsTaskByMetadataRequest($q, $fq, $sort, $limit);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'statisticsTaskByMetadata'
+     *
+     * @param  string $q Solr query (optional)
+     * @param  string[] $fq Solr filter query  Multiple query can be separated by &#x60;|&#x60;. (optional)
+     * @param  string $sort Sort results of facet on task (optional, default to 'count')
+     * @param  int $limit Limit results of facet (optional, default to 10)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function statisticsTaskByMetadataRequest($q = null, $fq = null, $sort = 'count', $limit = 10)
+    {
+
+        $resourcePath = '/statistics/task_by_metadata';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if (is_array($q)) {
+            $q = ObjectSerializer::serializeCollection($q, '', true);
+        }
+        if ($q !== null) {
+            $queryParams['q'] = $q;
+        }
+        // query params
+        if (is_array($fq)) {
+            $fq = ObjectSerializer::serializeCollection($fq, 'pipeDelimited', true);
+        }
+        if ($fq !== null) {
+            $queryParams['fq'] = $fq;
+        }
+        // query params
+        if (is_array($sort)) {
+            $sort = ObjectSerializer::serializeCollection($sort, '', true);
+        }
+        if ($sort !== null) {
+            $queryParams['sort'] = $sort;
+        }
+        // query params
+        if (is_array($limit)) {
+            $limit = ObjectSerializer::serializeCollection($limit, '', true);
+        }
+        if ($limit !== null) {
+            $queryParams['limit'] = $limit;
         }
 
 

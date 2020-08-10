@@ -62,7 +62,9 @@ class TaskFacetAllOf implements ModelInterface, ArrayAccess
         'to_process_files_sum' => 'int',
         'processed_files_sum' => 'int',
         'finalized_files_sum' => 'int',
-        'bandwidth_avg' => 'int'
+        'bandwidth_avg' => 'int',
+        'bandwidth_count' => 'int',
+        'tasks_count' => 'int'
     ];
 
     /**
@@ -76,7 +78,9 @@ class TaskFacetAllOf implements ModelInterface, ArrayAccess
         'to_process_files_sum' => null,
         'processed_files_sum' => null,
         'finalized_files_sum' => null,
-        'bandwidth_avg' => null
+        'bandwidth_avg' => null,
+        'bandwidth_count' => null,
+        'tasks_count' => null
     ];
 
     /**
@@ -111,7 +115,9 @@ class TaskFacetAllOf implements ModelInterface, ArrayAccess
         'to_process_files_sum' => 'to_process_files_sum',
         'processed_files_sum' => 'processed_files_sum',
         'finalized_files_sum' => 'finalized_files_sum',
-        'bandwidth_avg' => 'bandwidth_avg'
+        'bandwidth_avg' => 'bandwidth_avg',
+        'bandwidth_count' => 'bandwidth_count',
+        'tasks_count' => 'tasks_count'
     ];
 
     /**
@@ -125,7 +131,9 @@ class TaskFacetAllOf implements ModelInterface, ArrayAccess
         'to_process_files_sum' => 'setToProcessFilesSum',
         'processed_files_sum' => 'setProcessedFilesSum',
         'finalized_files_sum' => 'setFinalizedFilesSum',
-        'bandwidth_avg' => 'setBandwidthAvg'
+        'bandwidth_avg' => 'setBandwidthAvg',
+        'bandwidth_count' => 'setBandwidthCount',
+        'tasks_count' => 'setTasksCount'
     ];
 
     /**
@@ -139,7 +147,9 @@ class TaskFacetAllOf implements ModelInterface, ArrayAccess
         'to_process_files_sum' => 'getToProcessFilesSum',
         'processed_files_sum' => 'getProcessedFilesSum',
         'finalized_files_sum' => 'getFinalizedFilesSum',
-        'bandwidth_avg' => 'getBandwidthAvg'
+        'bandwidth_avg' => 'getBandwidthAvg',
+        'bandwidth_count' => 'getBandwidthCount',
+        'tasks_count' => 'getTasksCount'
     ];
 
     /**
@@ -208,6 +218,8 @@ class TaskFacetAllOf implements ModelInterface, ArrayAccess
         $this->container['processed_files_sum'] = isset($data['processed_files_sum']) ? $data['processed_files_sum'] : null;
         $this->container['finalized_files_sum'] = isset($data['finalized_files_sum']) ? $data['finalized_files_sum'] : null;
         $this->container['bandwidth_avg'] = isset($data['bandwidth_avg']) ? $data['bandwidth_avg'] : null;
+        $this->container['bandwidth_count'] = isset($data['bandwidth_count']) ? $data['bandwidth_count'] : null;
+        $this->container['tasks_count'] = isset($data['tasks_count']) ? $data['tasks_count'] : null;
     }
 
     /**
@@ -374,6 +386,54 @@ class TaskFacetAllOf implements ModelInterface, ArrayAccess
     public function setBandwidthAvg($bandwidth_avg)
     {
         $this->container['bandwidth_avg'] = $bandwidth_avg;
+
+        return $this;
+    }
+
+    /**
+     * Gets bandwidth_count
+     *
+     * @return int|null
+     */
+    public function getBandwidthCount()
+    {
+        return $this->container['bandwidth_count'];
+    }
+
+    /**
+     * Sets bandwidth_count
+     *
+     * @param int|null $bandwidth_count bandwidth_count
+     *
+     * @return $this
+     */
+    public function setBandwidthCount($bandwidth_count)
+    {
+        $this->container['bandwidth_count'] = $bandwidth_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets tasks_count
+     *
+     * @return int|null
+     */
+    public function getTasksCount()
+    {
+        return $this->container['tasks_count'];
+    }
+
+    /**
+     * Sets tasks_count
+     *
+     * @param int|null $tasks_count tasks_count
+     *
+     * @return $this
+     */
+    public function setTasksCount($tasks_count)
+    {
+        $this->container['tasks_count'] = $tasks_count;
 
         return $this;
     }

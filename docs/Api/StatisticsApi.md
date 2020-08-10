@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**statisticsByDate**](StatisticsApi.md#statisticsByDate) | **GET** /statistics/by_date | Get statistics about files, grouped by date
 [**statisticsByFileExtension**](StatisticsApi.md#statisticsByFileExtension) | **GET** /statistics/by_file_extension | Get statistics about files, grouped by file extension
 [**statisticsByGroupOwner**](StatisticsApi.md#statisticsByGroupOwner) | **GET** /statistics/by_group_owner | Get statistics about files, grouped by owner (group)
+[**statisticsByMetadata**](StatisticsApi.md#statisticsByMetadata) | **GET** /statistics/by_metadata | Get statistics about files, grouped by metadata
 [**statisticsByPrimaryCloud**](StatisticsApi.md#statisticsByPrimaryCloud) | **GET** /statistics/by_primary_cloud | Get statistics about files, grouped by primary Cloud
 [**statisticsByPrimaryName**](StatisticsApi.md#statisticsByPrimaryName) | **GET** /statistics/by_primary_name | Get statistics about files, grouped by primary storages
 [**statisticsByPrimaryNas**](StatisticsApi.md#statisticsByPrimaryNas) | **GET** /statistics/by_primary_nas | Get statistics about files, grouped by primary NAS
@@ -18,6 +19,7 @@ Method | HTTP request | Description
 [**statisticsBySize**](StatisticsApi.md#statisticsBySize) | **GET** /statistics/by_size | Get statistics about files, grouped by size
 [**statisticsByUserOwner**](StatisticsApi.md#statisticsByUserOwner) | **GET** /statistics/by_user_owner | Get statistics about files, grouped by owner (user)
 [**statisticsStorage**](StatisticsApi.md#statisticsStorage) | **GET** /statistics/storage | Get statistics about storages, grouped by types
+[**statisticsTaskByMetadata**](StatisticsApi.md#statisticsTaskByMetadata) | **GET** /statistics/task_by_metadata | Get statistics about tasks executions, grouped by metadata
 [**statisticsTaskByStatus**](StatisticsApi.md#statisticsTaskByStatus) | **GET** /statistics/task_by_status | Get statistics about tasks executions, grouped by status
 [**statisticsTaskByStorage**](StatisticsApi.md#statisticsTaskByStorage) | **GET** /statistics/task_by_storage | Get statistics about tasks executions, grouped by source and destination
 [**statisticsTaskByWorkflow**](StatisticsApi.md#statisticsTaskByWorkflow) | **GET** /statistics/task_by_workflow | Get statistics about tasks executions, grouped by workflow
@@ -233,6 +235,82 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\NodeumSDK\Client\Model\ByGroupOwnerFacet**](../Model/ByGroupOwnerFacet.md)
+
+### Authorization
+
+[BasicAuth](../../README.md#BasicAuth), [BearerAuth](../../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
+
+
+## statisticsByMetadata
+
+> \NodeumSDK\Client\Model\ByMetadataFacet statisticsByMetadata($q, $fq, $date_attr, $sort, $limit)
+
+Get statistics about files, grouped by metadata
+
+**API Key Scope**: statistics / by_metadata
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure HTTP basic authorization: BasicAuth
+$config = NodeumSDK\Client\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+
+// Configure API key authorization: BearerAuth
+$config = NodeumSDK\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = NodeumSDK\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new NodeumSDK\Client\Api\StatisticsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$q = 'q_example'; // string | Solr query
+$fq = array('fq_example'); // string[] | Solr filter query  Multiple query can be separated by `|`.
+$date_attr = 'date_attr_example'; // string | Type of date to facet on
+$sort = 'count'; // string | Sort results of facet
+$limit = 10; // int | Limit results of facet
+
+try {
+    $result = $apiInstance->statisticsByMetadata($q, $fq, $date_attr, $sort, $limit);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StatisticsApi->statisticsByMetadata: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **q** | **string**| Solr query | [optional]
+ **fq** | [**string[]**](../Model/string.md)| Solr filter query  Multiple query can be separated by &#x60;|&#x60;. | [optional]
+ **date_attr** | **string**| Type of date to facet on | [optional]
+ **sort** | **string**| Sort results of facet | [optional] [default to &#39;count&#39;]
+ **limit** | **int**| Limit results of facet | [optional] [default to 10]
+
+### Return type
+
+[**\NodeumSDK\Client\Model\ByMetadataFacet**](../Model/ByMetadataFacet.md)
 
 ### Authorization
 
@@ -1059,6 +1137,80 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\NodeumSDK\Client\Model\StorageFacet**](../Model/StorageFacet.md)
+
+### Authorization
+
+[BasicAuth](../../README.md#BasicAuth), [BearerAuth](../../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
+
+
+## statisticsTaskByMetadata
+
+> \NodeumSDK\Client\Model\ByTaskMetadataFacet statisticsTaskByMetadata($q, $fq, $sort, $limit)
+
+Get statistics about tasks executions, grouped by metadata
+
+**API Key Scope**: statistics / task_by_metadata
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure HTTP basic authorization: BasicAuth
+$config = NodeumSDK\Client\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+
+// Configure API key authorization: BearerAuth
+$config = NodeumSDK\Client\Configuration::getDefaultConfiguration()->setApiKey('Authorization', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = NodeumSDK\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Authorization', 'Bearer');
+
+
+$apiInstance = new NodeumSDK\Client\Api\StatisticsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$q = 'q_example'; // string | Solr query
+$fq = array('fq_example'); // string[] | Solr filter query  Multiple query can be separated by `|`.
+$sort = 'count'; // string | Sort results of facet on task
+$limit = 10; // int | Limit results of facet
+
+try {
+    $result = $apiInstance->statisticsTaskByMetadata($q, $fq, $sort, $limit);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StatisticsApi->statisticsTaskByMetadata: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **q** | **string**| Solr query | [optional]
+ **fq** | [**string[]**](../Model/string.md)| Solr filter query  Multiple query can be separated by &#x60;|&#x60;. | [optional]
+ **sort** | **string**| Sort results of facet on task | [optional] [default to &#39;count&#39;]
+ **limit** | **int**| Limit results of facet | [optional] [default to 10]
+
+### Return type
+
+[**\NodeumSDK\Client\Model\ByTaskMetadataFacet**](../Model/ByTaskMetadataFacet.md)
 
 ### Authorization
 

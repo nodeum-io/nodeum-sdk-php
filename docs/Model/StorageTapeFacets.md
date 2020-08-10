@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**count** | **int** |  | [optional] 
+**count** | **int** |  | [optional] [readonly] 
 **tape_type_i** | [**\NodeumSDK\Client\Model\ByTypeFacetBuckets**](ByTypeFacetBuckets.md) |  | [optional] 
 **tape_library_type_i** | [**\NodeumSDK\Client\Model\ByTypeFacetBuckets**](ByTypeFacetBuckets.md) |  | [optional] 
 **pool_type_i** | [**\NodeumSDK\Client\Model\ByTypeFacetBuckets**](ByTypeFacetBuckets.md) |  | [optional] 

@@ -64,7 +64,8 @@ class CloudBucket implements ModelInterface, ArrayAccess
         'file_count' => 'int',
         'file_size_sum' => 'int',
         'location' => 'string',
-        'price' => 'string'
+        'price' => 'string',
+        'options' => 'string'
     ];
 
     /**
@@ -80,7 +81,8 @@ class CloudBucket implements ModelInterface, ArrayAccess
         'file_count' => null,
         'file_size_sum' => null,
         'location' => null,
-        'price' => null
+        'price' => null,
+        'options' => null
     ];
 
     /**
@@ -117,7 +119,8 @@ class CloudBucket implements ModelInterface, ArrayAccess
         'file_count' => 'file_count',
         'file_size_sum' => 'file_size_sum',
         'location' => 'location',
-        'price' => 'price'
+        'price' => 'price',
+        'options' => 'options'
     ];
 
     /**
@@ -133,7 +136,8 @@ class CloudBucket implements ModelInterface, ArrayAccess
         'file_count' => 'setFileCount',
         'file_size_sum' => 'setFileSizeSum',
         'location' => 'setLocation',
-        'price' => 'setPrice'
+        'price' => 'setPrice',
+        'options' => 'setOptions'
     ];
 
     /**
@@ -149,7 +153,8 @@ class CloudBucket implements ModelInterface, ArrayAccess
         'file_count' => 'getFileCount',
         'file_size_sum' => 'getFileSizeSum',
         'location' => 'getLocation',
-        'price' => 'getPrice'
+        'price' => 'getPrice',
+        'options' => 'getOptions'
     ];
 
     /**
@@ -220,6 +225,7 @@ class CloudBucket implements ModelInterface, ArrayAccess
         $this->container['file_size_sum'] = isset($data['file_size_sum']) ? $data['file_size_sum'] : null;
         $this->container['location'] = isset($data['location']) ? $data['location'] : null;
         $this->container['price'] = isset($data['price']) ? $data['price'] : null;
+        $this->container['options'] = isset($data['options']) ? $data['options'] : null;
     }
 
     /**
@@ -434,6 +440,30 @@ class CloudBucket implements ModelInterface, ArrayAccess
     public function setPrice($price)
     {
         $this->container['price'] = $price;
+
+        return $this;
+    }
+
+    /**
+     * Gets options
+     *
+     * @return string|null
+     */
+    public function getOptions()
+    {
+        return $this->container['options'];
+    }
+
+    /**
+     * Sets options
+     *
+     * @param string|null $options S3FS mounting options, separated by comma
+     *
+     * @return $this
+     */
+    public function setOptions($options)
+    {
+        $this->container['options'] = $options;
 
         return $this;
     }

@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**count** | **int** |  | [optional] 
-**files_count** | **int** |  | [optional] 
-**file_size_sum** | **int** |  | [optional] 
-**cost** | **float** |  | [optional] 
+**count** | **int** |  | [optional] [readonly] 
+**files_count** | **int** |  | [optional] [readonly] 
+**file_size_sum** | **int** |  | [optional] [readonly] 
+**cost** | **float** |  | [optional] [readonly] 
 **less_100_kb** | [**\NodeumSDK\Client\Model\ByDateFacet**](ByDateFacet.md) |  | [optional] 
 **less_1_mb** | [**\NodeumSDK\Client\Model\ByDateFacet**](ByDateFacet.md) |  | [optional] 
 **less_10_mb** | [**\NodeumSDK\Client\Model\ByDateFacet**](ByDateFacet.md) |  | [optional] 
