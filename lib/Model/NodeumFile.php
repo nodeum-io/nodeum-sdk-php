@@ -68,7 +68,10 @@ class NodeumFile implements ModelInterface, ArrayAccess
         'modification_date' => 'string',
         'access_date' => 'string',
         'uid' => 'int',
-        'gid' => 'int'
+        'gid' => 'int',
+        'in_cache' => 'int',
+        'offline' => 'int',
+        'extern' => 'int'
     ];
 
     /**
@@ -88,7 +91,10 @@ class NodeumFile implements ModelInterface, ArrayAccess
         'modification_date' => null,
         'access_date' => null,
         'uid' => null,
-        'gid' => null
+        'gid' => null,
+        'in_cache' => null,
+        'offline' => null,
+        'extern' => null
     ];
 
     /**
@@ -129,7 +135,10 @@ class NodeumFile implements ModelInterface, ArrayAccess
         'modification_date' => 'modification_date',
         'access_date' => 'access_date',
         'uid' => 'uid',
-        'gid' => 'gid'
+        'gid' => 'gid',
+        'in_cache' => 'in_cache',
+        'offline' => 'offline',
+        'extern' => 'extern'
     ];
 
     /**
@@ -149,7 +158,10 @@ class NodeumFile implements ModelInterface, ArrayAccess
         'modification_date' => 'setModificationDate',
         'access_date' => 'setAccessDate',
         'uid' => 'setUid',
-        'gid' => 'setGid'
+        'gid' => 'setGid',
+        'in_cache' => 'setInCache',
+        'offline' => 'setOffline',
+        'extern' => 'setExtern'
     ];
 
     /**
@@ -169,7 +181,10 @@ class NodeumFile implements ModelInterface, ArrayAccess
         'modification_date' => 'getModificationDate',
         'access_date' => 'getAccessDate',
         'uid' => 'getUid',
-        'gid' => 'getGid'
+        'gid' => 'getGid',
+        'in_cache' => 'getInCache',
+        'offline' => 'getOffline',
+        'extern' => 'getExtern'
     ];
 
     /**
@@ -259,6 +274,9 @@ class NodeumFile implements ModelInterface, ArrayAccess
         $this->container['access_date'] = isset($data['access_date']) ? $data['access_date'] : null;
         $this->container['uid'] = isset($data['uid']) ? $data['uid'] : null;
         $this->container['gid'] = isset($data['gid']) ? $data['gid'] : null;
+        $this->container['in_cache'] = isset($data['in_cache']) ? $data['in_cache'] : null;
+        $this->container['offline'] = isset($data['offline']) ? $data['offline'] : null;
+        $this->container['extern'] = isset($data['extern']) ? $data['extern'] : null;
     }
 
     /**
@@ -586,6 +604,78 @@ class NodeumFile implements ModelInterface, ArrayAccess
     public function setGid($gid)
     {
         $this->container['gid'] = $gid;
+
+        return $this;
+    }
+
+    /**
+     * Gets in_cache
+     *
+     * @return int|null
+     */
+    public function getInCache()
+    {
+        return $this->container['in_cache'];
+    }
+
+    /**
+     * Sets in_cache
+     *
+     * @param int|null $in_cache in_cache
+     *
+     * @return $this
+     */
+    public function setInCache($in_cache)
+    {
+        $this->container['in_cache'] = $in_cache;
+
+        return $this;
+    }
+
+    /**
+     * Gets offline
+     *
+     * @return int|null
+     */
+    public function getOffline()
+    {
+        return $this->container['offline'];
+    }
+
+    /**
+     * Sets offline
+     *
+     * @param int|null $offline offline
+     *
+     * @return $this
+     */
+    public function setOffline($offline)
+    {
+        $this->container['offline'] = $offline;
+
+        return $this;
+    }
+
+    /**
+     * Gets extern
+     *
+     * @return int|null
+     */
+    public function getExtern()
+    {
+        return $this->container['extern'];
+    }
+
+    /**
+     * Sets extern
+     *
+     * @param int|null $extern extern
+     *
+     * @return $this
+     */
+    public function setExtern($extern)
+    {
+        $this->container['extern'] = $extern;
 
         return $this;
     }

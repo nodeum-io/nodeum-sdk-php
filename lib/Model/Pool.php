@@ -62,7 +62,8 @@ class Pool implements ModelInterface, ArrayAccess
         'comment' => 'string',
         'type' => 'string',
         'content' => 'string',
-        'primary_id' => 'int'
+        'primary_id' => 'int',
+        'storage_id' => 'int'
     ];
 
     /**
@@ -76,7 +77,8 @@ class Pool implements ModelInterface, ArrayAccess
         'comment' => null,
         'type' => null,
         'content' => null,
-        'primary_id' => null
+        'primary_id' => null,
+        'storage_id' => null
     ];
 
     /**
@@ -111,7 +113,8 @@ class Pool implements ModelInterface, ArrayAccess
         'comment' => 'comment',
         'type' => 'type',
         'content' => 'content',
-        'primary_id' => 'primary_id'
+        'primary_id' => 'primary_id',
+        'storage_id' => 'storage_id'
     ];
 
     /**
@@ -125,7 +128,8 @@ class Pool implements ModelInterface, ArrayAccess
         'comment' => 'setComment',
         'type' => 'setType',
         'content' => 'setContent',
-        'primary_id' => 'setPrimaryId'
+        'primary_id' => 'setPrimaryId',
+        'storage_id' => 'setStorageId'
     ];
 
     /**
@@ -139,7 +143,8 @@ class Pool implements ModelInterface, ArrayAccess
         'comment' => 'getComment',
         'type' => 'getType',
         'content' => 'getContent',
-        'primary_id' => 'getPrimaryId'
+        'primary_id' => 'getPrimaryId',
+        'storage_id' => 'getStorageId'
     ];
 
     /**
@@ -248,6 +253,7 @@ class Pool implements ModelInterface, ArrayAccess
         $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         $this->container['content'] = isset($data['content']) ? $data['content'] : null;
         $this->container['primary_id'] = isset($data['primary_id']) ? $data['primary_id'] : null;
+        $this->container['storage_id'] = isset($data['storage_id']) ? $data['storage_id'] : null;
     }
 
     /**
@@ -448,6 +454,30 @@ class Pool implements ModelInterface, ArrayAccess
     public function setPrimaryId($primary_id)
     {
         $this->container['primary_id'] = $primary_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets storage_id
+     *
+     * @return int|null
+     */
+    public function getStorageId()
+    {
+        return $this->container['storage_id'];
+    }
+
+    /**
+     * Sets storage_id
+     *
+     * @param int|null $storage_id For pool of tapes, used to link to a tape library id
+     *
+     * @return $this
+     */
+    public function setStorageId($storage_id)
+    {
+        $this->container['storage_id'] = $storage_id;
 
         return $this;
     }

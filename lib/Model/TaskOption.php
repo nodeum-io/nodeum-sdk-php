@@ -186,6 +186,7 @@ class TaskOption implements ModelInterface, ArrayAccess
     const TYPE_EJECT_TAPE_AFTER = 'eject_tape_after';
     const TYPE_BARCODES = 'barcodes';
     const TYPE_OVERWRITE = 'overwrite';
+    const TYPE_SOFT_ERASE = 'soft_erase';
     const TYPE_TASK_TEMPLATE = 'task_template';
     
 
@@ -216,6 +217,7 @@ class TaskOption implements ModelInterface, ArrayAccess
             self::TYPE_EJECT_TAPE_AFTER,
             self::TYPE_BARCODES,
             self::TYPE_OVERWRITE,
+            self::TYPE_SOFT_ERASE,
             self::TYPE_TASK_TEMPLATE,
         ];
     }

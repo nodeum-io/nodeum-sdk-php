@@ -261,6 +261,7 @@ class Task implements ModelInterface, ArrayAccess
     const WORKFLOW_TYPE_DATA_ENRICHMENT = 'data_enrichment';
     const WORKFLOW_ACTION_COPY = 'copy';
     const WORKFLOW_ACTION_MOVE = 'move';
+    const WORKFLOW_ACTION_ERASE = 'erase';
     const WORKFLOW_ACTION_SCAN = 'scan';
     const WORKFLOW_ACTION_REHYDRATATION = 'rehydratation';
     const WORKFLOW_ACTION_FORMAT = 'format';
@@ -331,6 +332,7 @@ class Task implements ModelInterface, ArrayAccess
         return [
             self::WORKFLOW_ACTION_COPY,
             self::WORKFLOW_ACTION_MOVE,
+            self::WORKFLOW_ACTION_ERASE,
             self::WORKFLOW_ACTION_SCAN,
             self::WORKFLOW_ACTION_REHYDRATATION,
             self::WORKFLOW_ACTION_FORMAT,
